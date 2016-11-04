@@ -1,15 +1,10 @@
-package shop.codecool.model;
+package com.codecool.shop.model;
 
 import java.util.ArrayList;
 
 
 public class Supplier extends BaseModel {
     private ArrayList<Product> products;
-
-    public Supplier() {
-        super();
-        this.products = null;
-    }
 
     public Supplier(String name, String description) {
         super(name);

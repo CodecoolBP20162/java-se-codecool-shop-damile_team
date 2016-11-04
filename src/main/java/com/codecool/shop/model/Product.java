@@ -1,6 +1,5 @@
-package shop.codecool.model;
+package com.codecool.shop.model;
 
-import java.util.ArrayList;
 import java.util.Currency;
 
 public class Product extends BaseModel {
@@ -11,22 +10,11 @@ public class Product extends BaseModel {
     private Supplier supplier;
 
 
-    public Product() {
-        super();
-        this.defaultPrice = 0;
-        this.defaultCurrency = null;
-        this.productCategory = null;
-        this.supplier = null;
-
-    }
-
     public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
-        this.supplier = supplier;
-        this.supplier.addProduct(this);
-        this.productCategory = productCategory;
-        this.productCategory.addProduct(this);
+        this.setSupplier(supplier);
+        this.setProductCategory(productCategory);
     }
 
     public float getDefaultPrice() {
@@ -60,6 +48,7 @@ public class Product extends BaseModel {
 
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
+        this.productCategory.addProduct(this);
     }
 
     public Supplier getSupplier() {
@@ -68,14 +57,7 @@ public class Product extends BaseModel {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
-    }
-
-    public ArrayList getAllProductsBy(Supplier supplier) {
-        return supplier.getProducts();
-    }
-
-    public ArrayList getAllProductsBy(ProductCategory productCategory) {
-        return productCategory.getProducts();
+        this.supplier.addProduct(this);
     }
 
     @Override

@@ -1,16 +1,10 @@
-package shop.codecool.model;
+package com.codecool.shop.model;
 
 import java.util.ArrayList;
 
 public class ProductCategory extends BaseModel {
     private String department;
     private ArrayList<Product> products;
-
-    public ProductCategory() {
-        super();
-        this.department = "Default";
-        this.products = null;
-    }
 
     public ProductCategory(String name, String department, String description) {
         super(name);

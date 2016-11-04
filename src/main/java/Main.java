@@ -1,7 +1,6 @@
 import static spark.Spark.*;
 
-import shop.codecool.controller.*;
-import spark.route.RouteOverview;
+import com.codecool.shop.controller.ProductController;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 public class Main {

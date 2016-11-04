@@ -1,28 +1,30 @@
-package shop.codecool.model;
+package com.codecool.shop.model;
 
 
 import java.lang.reflect.Field;
 
 public class BaseModel {
 
-    protected static int counter = 1;
     protected int id;
     protected String name;
     protected String description;
 
-    public BaseModel() {
-        this.id = counter++;
-    }
-
     public BaseModel(String name) {
-        this.id = counter++;
         this.name = name;
     }
 
     public BaseModel(String name, String description) {
-        this.id = counter++;
         this.name = name;
         this.description = description;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
