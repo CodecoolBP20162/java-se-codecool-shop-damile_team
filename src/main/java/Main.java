@@ -1,4 +1,5 @@
 import static spark.Spark.*;
+import static spark.debug.DebugScreen.enableDebugScreen;
 
 import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.*;
@@ -15,11 +16,17 @@ public class Main {
         staticFileLocation("/public");
         port(8888);
 
+        // populate some data for the memory storage
         populateData();
 
-        get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
+        // Always start with more specific routes
         get("/hello", (req, res) -> "Hello World");
 
+        // Always add generic routes to the end
+        get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
+
+        // Add this line to your project to enable the debug screen
+        enableDebugScreen();
     }
 
     public static void populateData() {
