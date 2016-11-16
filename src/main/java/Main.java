@@ -5,6 +5,8 @@ import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.*;
+import spark.Request;
+import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
 public class Main {
@@ -24,6 +26,10 @@ public class Main {
 
         // Always add generic routes to the end
         get("/", ProductController::renderProducts, new ThymeleafTemplateEngine());
+        // Equivalent with above
+        get("/index", (Request req, Response res) -> {
+           return new ThymeleafTemplateEngine().render( ProductController.renderProducts(req, res) );
+        });
 
         // Add this line to your project to enable the debug screen
         enableDebugScreen();
