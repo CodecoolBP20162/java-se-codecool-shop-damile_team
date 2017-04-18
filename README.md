@@ -1,6 +1,6 @@
 # Codecool Online Shop
 
-From Python To Java, 2nd TW week, Project skeleton
+Java SE: 2nd TW week, Project skeleton
 
 # install
 
