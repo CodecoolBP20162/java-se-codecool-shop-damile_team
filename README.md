@@ -2,7 +2,7 @@
 
 Java SE: 2nd TW week, Project skeleton
 
-# install
+# Install
 
 Import this project to IntelliJ as a Maven project.
 IntelliJ can auto-install the dependencies from the pom.xml
