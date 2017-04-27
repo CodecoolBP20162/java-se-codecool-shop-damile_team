@@ -40,6 +40,9 @@
 
 <div class="container">
     <div class="well well-sm">
+        <a href="#" class="btn btn-info btn-lg" style="float:right">
+            <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+        </a>
         <div class="dropdown">
             <button onclick="location.href='products'" class="dropbtn">All products</button>
             <button onclick="FilterByCategory()" class="dropbtn">Filter by category:</button>
@@ -74,34 +77,42 @@
                             <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <div class="container">
-                                <!-- Trigger the modal with a button -->
-                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add to cart</button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="myModal" role="dialog">
-                                    <div class="modal-dialog">
+                            <!-- Trigger the modal with a button -->
+                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+                                    th:attr="data-target='#myModal'+${prod.id}"
+                                    >Add to cart
+                            </button>
 
-                                        <!-- Modal content-->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title" style="color: green"><span class="glyphicon glyphicon-ok"></span>This product has been added to your cart</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
-                                                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
-                                                     th:attr="src='/img/product_' + ${prod.id} + '.jpg'" alt=""/>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" th:attr="id='myModal'+${prod.id}" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title" style="color: green"><span
+                                                    class="glyphicon glyphicon-ok"></span>This product has been added to
+                                                your cart</h4>
                                         </div>
-
+                                        <div class="modal-body">
+                                            <h4 class="group inner list-group-item-heading" th:text="${prod.name}">
+                                                Product name</h4>
+                                            <img class="group list-group-image"
+                                                 src="http://placehold.it/400x250/000/fff"
+                                                 th:attr="src='/img/product_' + ${prod.id} + '.jpg'" alt=""/>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
