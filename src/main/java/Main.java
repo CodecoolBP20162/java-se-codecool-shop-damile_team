@@ -36,11 +36,16 @@ public class Main {
         get("/mobiles", ProductController::renderMobiles, new ThymeleafTemplateEngine());
         get("/tvs", ProductController::renderTVs, new ThymeleafTemplateEngine());
 
+        get("/amazon", ProductController::renderAmazon, new ThymeleafTemplateEngine());
+        get("/lenovo", ProductController::renderLenovo, new ThymeleafTemplateEngine());
+        get("/apple", ProductController::renderApple, new ThymeleafTemplateEngine());
+        get("/samsung", ProductController::renderSamsung, new ThymeleafTemplateEngine());
+        get("/others", ProductController::renderOthers, new ThymeleafTemplateEngine());
+
         // Equivalent with above
-        get("/index", (Request req, Response res) -> {
+        get("/products", (Request req, Response res) -> {
            return new ThymeleafTemplateEngine().render( ProductController.renderProducts(req, res) );
         });
-
 
         // Add this line to your project to enable the debug screen
         enableDebugScreen();
@@ -57,6 +62,12 @@ public class Main {
         supplierDataStore.add(amazon);
         Supplier lenovo = new Supplier("Lenovo", "Computers");
         supplierDataStore.add(lenovo);
+        Supplier apple = new Supplier("Apple", "Mobile phones");
+        supplierDataStore.add(apple);
+        Supplier samsung = new Supplier("Samsung", "Computers and mobile phones");
+        supplierDataStore.add(samsung);
+        Supplier others = new Supplier("Others", "Digital content and services");
+        supplierDataStore.add(others);
 
         //setting up a new product category
         ProductCategory tablet = new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
@@ -73,13 +84,13 @@ public class Main {
         productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
         productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
 
-        productDataStore.add(new Product("Iphone 9", 649f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", mobile, amazon));
-        productDataStore.add(new Product("Samsung Galaxy Note 7", 969, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", mobile, lenovo));
-        productDataStore.add(new Product("HTC Desire", 90, "USD", "Our HTC Desire is a great value for media consumption.", mobile, amazon));
+        productDataStore.add(new Product("Iphone 9", 649f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", mobile, apple));
+        productDataStore.add(new Product("Samsung Galaxy Note 7", 969, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", mobile, samsung));
+        productDataStore.add(new Product("HTC Desire", 90, "USD", "Our HTC Desire is a great value for media consumption.", mobile, others));
 
-        productDataStore.add(new Product("Samsung UN28H4000", 464, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tv, amazon));
-        productDataStore.add(new Product("Vizio D24-D1 24\" Smart LCD TV", 849, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tv, lenovo));
-        productDataStore.add(new Product("Element ELEFW328R", 128f, "USD", "Our HTC Desire is a great value for media consumption.", tv, amazon));
+        productDataStore.add(new Product("Samsung UN28H4000", 464, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tv, samsung));
+        productDataStore.add(new Product("Vizio D24-D1 24\" Smart LCD TV", 849, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tv, others));
+        productDataStore.add(new Product("Element ELEFW328R", 128f, "USD", "Our HTC Desire is a great value for media consumption.", tv, others));
 
     }
 

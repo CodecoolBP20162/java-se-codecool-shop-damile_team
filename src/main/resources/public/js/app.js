@@ -1,5 +1,8 @@
-function Filter() {
-    document.getElementById("myDropdown").classList.toggle("show");
+function FilterByCategory() {
+    document.getElementById("myDropdown1").classList.toggle("show");
+};
+function FilterBySupplier() {
+    document.getElementById("myDropdown2").classList.toggle("show");
 };
 window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
