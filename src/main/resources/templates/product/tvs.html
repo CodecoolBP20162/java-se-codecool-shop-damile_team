@@ -10,11 +10,6 @@
     <!-- Latest compiled and minified Jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <!-- Using Ajax -->
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" type="text/javascript"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="path/to/app.js"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -40,12 +35,8 @@
 
 <div class="container">
     <div class="well well-sm">
+        <strong th:text="${category.name}">Category Title</strong>
     </div>
-    <!--<script>-->
-        <!--function myFunction() {-->
-        <!--var x = document.getElementById("mySelect").value;-->
-        <!--document.getElementById("demo").innerHTML = "You selected: " + x;}-->
-    <!--</script>-->
 
     <div id="products" class="row list-group">
 
