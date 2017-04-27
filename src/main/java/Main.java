@@ -27,26 +27,37 @@ public class Main {
         // populate some data for the memory storage
         populateData();
 
-        // Always start with more specific routes
-        get("/hello", (req, res) -> "Hello World");
-
         // Always add generic routes to the end
         get("/", ProductController::renderWelcomePage, new ThymeleafTemplateEngine());
-        get("/tablets", ProductController::renderTablets, new ThymeleafTemplateEngine());
-        get("/mobiles", ProductController::renderMobiles, new ThymeleafTemplateEngine());
-        get("/tvs", ProductController::renderTVs, new ThymeleafTemplateEngine());
-
-        get("/amazon", ProductController::renderAmazon, new ThymeleafTemplateEngine());
-        get("/lenovo", ProductController::renderLenovo, new ThymeleafTemplateEngine());
-        get("/apple", ProductController::renderApple, new ThymeleafTemplateEngine());
-        get("/samsung", ProductController::renderSamsung, new ThymeleafTemplateEngine());
-        get("/others", ProductController::renderOthers, new ThymeleafTemplateEngine());
 
         // Equivalent with above
-        get("/products", (Request req, Response res) -> {
-           return new ThymeleafTemplateEngine().render( ProductController.renderProducts(req, res) );
+        get("/tablets", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(ProductController.renderForCategory(1, req, res));
         });
-
+        get("/mobiles", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(ProductController.renderForCategory(2, req, res));
+        });
+        get("/tvs", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(ProductController.renderForCategory(3, req, res));
+        });
+        get("/products", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(ProductController.renderProducts(req, res));
+        });
+        get("/amazon", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(ProductController.renderForSupplier(1, req, res));
+        });
+        get("/lenovo", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(ProductController.renderForSupplier(2, req, res));
+        });
+        get("/apple", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(ProductController.renderForSupplier(3, req, res));
+        });
+        get("/samsung", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(ProductController.renderForSupplier(4, req, res));
+        });
+        get("/others", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(ProductController.renderForSupplier(5, req, res));
+        });
         // Add this line to your project to enable the debug screen
         enableDebugScreen();
     }
