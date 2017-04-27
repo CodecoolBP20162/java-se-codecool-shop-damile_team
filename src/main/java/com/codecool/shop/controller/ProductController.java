@@ -13,6 +13,11 @@ import java.util.Map;
 
 public class ProductController {
 
+    public static ModelAndView renderWelcomePage(Request req, Response res) {
+        Map params = new HashMap<>();
+        return new ModelAndView(params, "product/welcome");
+    }
+
     public static ModelAndView renderProducts(Request req, Response res) {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
@@ -29,7 +34,7 @@ public class ProductController {
         Map params = new HashMap<>();
         params.put("category", productCategoryDataStore.find(1));
         params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        return new ModelAndView(params, "product/tablets");
+        return new ModelAndView(params, "product/index");
     }
 
     public static ModelAndView renderMobiles(Request req, Response res) {
@@ -40,7 +45,7 @@ public class ProductController {
         Map params = new HashMap<>();
         params.put("category", productCategoryDataStore.find(2));
         params.put("products", productDataStore.getBy(productCategoryDataStore.find(2)));
-        return new ModelAndView(params, "product/mobiles");
+        return new ModelAndView(params, "product/index");
     }
 
     public static ModelAndView renderTVs(Request req, Response res) {
@@ -51,7 +56,7 @@ public class ProductController {
         Map params = new HashMap<>();
         params.put("category", productCategoryDataStore.find(3));
         params.put("products", productDataStore.getBy(productCategoryDataStore.find(3)));
-        return new ModelAndView(params, "product/tvs");
+        return new ModelAndView(params, "product/index");
     }
 
 }
