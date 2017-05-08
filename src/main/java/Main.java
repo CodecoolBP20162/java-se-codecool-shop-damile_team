@@ -28,36 +28,19 @@ public class Main {
         populateData();
 
         // Always add generic routes to the end
-        get("/", ProductController::renderWelcomePage, new ThymeleafTemplateEngine());
-
-        // Equivalent with above
-        get("/tablets", (Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render(ProductController.renderForCategory(1, req, res));
-        });
-        get("/mobiles", (Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render(ProductController.renderForCategory(2, req, res));
-        });
-        get("/tvs", (Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render(ProductController.renderForCategory(3, req, res));
-        });
-        get("/products", (Request req, Response res) -> {
+        get("/", (Request req, Response res) -> {
             return new ThymeleafTemplateEngine().render(ProductController.renderProducts(req, res));
         });
-        get("/amazon", (Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render(ProductController.renderForSupplier(1, req, res));
+
+        // Equivalent with above
+        get("/Category/:categoryName", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(ProductController.renderForCategory(req, res));
         });
-        get("/lenovo", (Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render(ProductController.renderForSupplier(2, req, res));
+//
+        get("/Supplier/:supplierName", (Request req, Response res) -> {
+            return new ThymeleafTemplateEngine().render(ProductController.renderForSupplier(req, res));
         });
-        get("/apple", (Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render(ProductController.renderForSupplier(3, req, res));
-        });
-        get("/samsung", (Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render(ProductController.renderForSupplier(4, req, res));
-        });
-        get("/others", (Request req, Response res) -> {
-            return new ThymeleafTemplateEngine().render(ProductController.renderForSupplier(5, req, res));
-        });
+
         // Add this line to your project to enable the debug screen
         enableDebugScreen();
     }
