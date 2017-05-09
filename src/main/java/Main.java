@@ -1,7 +1,9 @@
 import com.codecool.shop.controller.ProductController;
+import com.codecool.shop.dao.DaoWithJDBC;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.DaoMemWithJDBC;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
@@ -18,7 +20,8 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 public class Main {
 
     public static void main(String[] args) {
-
+        DaoWithJDBC daoWithJDBC = new DaoMemWithJDBC();
+        System.out.println(daoWithJDBC.listAllProducts());
         // default server settings
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
@@ -73,18 +76,6 @@ public class Main {
         ProductCategory tv = new ProductCategory("TV", "Hardware", "A flat panel LCD TV set that uses LEDs (light emitting diodes) for its backlight source rather than the earlier cold cathode fluorescent lamps.");
         productCategoryDataStore.add(tv);
 
-        //setting up products and printing it
-        productDataStore.add(new Product("Amazon Fire", 49.9f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tablet, amazon));
-        productDataStore.add(new Product("Lenovo IdeaPad Miix 700", 479, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tablet, lenovo));
-        productDataStore.add(new Product("Amazon Fire HD 8", 89, "USD", "Amazon's latest Fire HD 8 tablet is a great value for media consumption.", tablet, amazon));
-
-        productDataStore.add(new Product("Iphone 7", 649f, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", mobile, apple));
-        productDataStore.add(new Product("Samsung Galaxy Note 7", 969, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", mobile, samsung));
-        productDataStore.add(new Product("HTC Desire", 90, "USD", "Our HTC Desire is a great value for media consumption.", mobile, others));
-
-        productDataStore.add(new Product("Samsung UN28H4000", 464, "USD", "Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.", tv, samsung));
-        productDataStore.add(new Product("Vizio D24-D1 24\" Smart LCD TV", 849, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", tv, others));
-        productDataStore.add(new Product("Element ELEFW328R", 128f, "USD", "Our HTC Desire is a great value for media consumption.", tv, others));
 
     }
 
