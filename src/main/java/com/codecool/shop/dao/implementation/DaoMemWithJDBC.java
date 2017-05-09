@@ -1,6 +1,7 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.DaoWithJDBC;
+import com.codecool.shop.model.*;
 
 import java.awt.*;
 import java.sql.*;
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class DaoMemWithJDBC implements DaoWithJDBC {
 
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/todolist";
+    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
     private static final String DB_USER = "szilarddavid";
     private static final String DB_PASSWORD = "szilarddavid";
 
@@ -18,6 +19,27 @@ public class DaoMemWithJDBC implements DaoWithJDBC {
         String query = "SELECT * FROM products;";
 
         List<Object> resultList = new ArrayList<>();
+
+        try {
+            Connection connection = getConnection();
+            Statement statement =connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            System.out.println(resultSet);
+            while (resultSet.next()) {
+                Product prod = new Product(
+                        resultSet.getString("name"),
+                        resultSet.getInt("defaultPrice"),
+                        resultSet.getString("currencyString"),
+                        resultSet.getString("description"),
+                        new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display."),
+                        new Supplier("Amazon", "Digital content and services")
+                );
+                resultList.add(prod);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        resultList.add(new Product("Samsung Galaxy Note 7", 969, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display."),new Supplier("Amazon", "Digital content and services")));
         return resultList;
     }
 
