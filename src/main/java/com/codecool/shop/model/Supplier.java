@@ -5,10 +5,20 @@ import java.util.ArrayList;
 
 public class Supplier extends BaseModel {
     private ArrayList<Product> products;
+    private Integer supplierId;
+    private String description;
 
-    public Supplier(String name, String description) {
+    public Supplier(Integer supplierId, String name, String description) {
         super(name);
+        this.setSupplierId(supplierId);
         this.products = new ArrayList<>();
+        this.description = description;
+    }
+
+    public Integer getSupplierId() {return supplierId;}
+
+    public void setSupplierId(Integer supplierId) {
+        this.supplierId = supplierId;
     }
 
     public void setProducts(ArrayList<Product> products) {
@@ -27,7 +37,7 @@ public class Supplier extends BaseModel {
         return String.format("id: %1$d, " +
                         "name: %2$s, " +
                         "description: %3$s",
-                this.id,
+                this.supplierId,
                 this.name,
                 this.description
         );
