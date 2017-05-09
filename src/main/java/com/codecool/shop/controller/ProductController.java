@@ -1,13 +1,11 @@
 package com.codecool.shop.controller;
 
-import com.codecool.shop.dao.DaoWithJDBC;
+import com.codecool.shop.dao.*;
+import com.codecool.shop.dao.ProductDaoWithJDBC;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.dao.implementation.DaoMemWithJDBC;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -27,15 +25,17 @@ public class ProductController {
 
 
     public static ModelAndView renderProducts(Request req, Response res) {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        DaoWithJDBC daoWithJDBC = new DaoMemWithJDBC();
+//        ProductDao productDataStore = ProductDaoMem.getInstance();
+//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        ProductDaoWithJDBC productDaoWithJDBC = new ProductDaoMemWithJDBC();
+        SupplierDaoWithJDBC supplierDaoWithJDBC = new SupplierDaoMemWithJDBC();
+        ProductCategoryDaoWithJDBC productCategoryDaoWithJDBC = new ProductCategoryDaoMemWithJDBC();
 
         Map params = new HashMap<>();
-        params.put("category", productCategoryDataStore.getAll());
-        params.put("supplier", supplierDataStore.getAll());
-        params.put("products", daoWithJDBC.listAllProducts());
+        params.put("category", productCategoryDaoWithJDBC.getAllCategories());
+        params.put("supplier", supplierDaoWithJDBC.getAllSupplier());
+        params.put("products", productDaoWithJDBC.listAllProducts());
         return new ModelAndView(params, "product/index");
     }
 
