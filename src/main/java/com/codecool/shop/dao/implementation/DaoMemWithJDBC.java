@@ -27,6 +27,7 @@ public class DaoMemWithJDBC implements DaoWithJDBC {
             System.out.println(resultSet);
             while (resultSet.next()) {
                 Product prod = new Product(
+                        resultSet.getInt("productId"),
                         resultSet.getString("name"),
                         resultSet.getInt("defaultPrice"),
                         resultSet.getString("currencyString"),
@@ -39,7 +40,6 @@ public class DaoMemWithJDBC implements DaoWithJDBC {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        resultList.add(new Product("Samsung Galaxy Note 7", 969, "USD", "Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.", new ProductCategory("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display."),new Supplier("Amazon", "Digital content and services")));
         return resultList;
     }
 
