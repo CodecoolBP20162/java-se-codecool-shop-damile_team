@@ -76,7 +76,7 @@ public class Product extends BaseModel {
                         "defaultCurrency: %4$s, " +
                         "productCategory: %5$s, " +
                         "supplier: %6$s",
-                this.id,
+                this.productId,
                 this.name,
                 this.defaultPrice,
                 this.defaultCurrency.toString(),
