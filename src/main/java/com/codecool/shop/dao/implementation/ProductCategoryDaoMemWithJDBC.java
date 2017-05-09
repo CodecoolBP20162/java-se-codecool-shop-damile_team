@@ -22,11 +22,12 @@ public class ProductCategoryDaoMemWithJDBC implements ProductCategoryDaoWithJDBC
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 ProductCategory prodCat = new ProductCategory(
-                        resultSet.getInt(1),
+                        resultSet.getInt("productCategoryId"),
                         resultSet.getString("name"),
                         resultSet.getString("department"),
                         resultSet.getString("description")
                 );
+                resultList.add(prodCat);
             }
         } catch (SQLException e) {
             e.printStackTrace();
