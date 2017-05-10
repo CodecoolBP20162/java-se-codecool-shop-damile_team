@@ -44,6 +44,7 @@ public class ProductDaoMemWithJDBC implements ProductDaoWithJDBC {
                 );
                 resultList.add(prod);
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,13 +53,65 @@ public class ProductDaoMemWithJDBC implements ProductDaoWithJDBC {
 
     @Override
     public List<Product> getProductBy(Supplier supplier) {
+        String query = "SELECT * FROM products WHERE supplierId = " + supplier.getSupplierId() + ";";
         List<Product> resultList = new ArrayList<>();
+        ProductCategoryDaoWithJDBC productCategoryDao = new ProductCategoryDaoMemWithJDBC();
+
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                int prodCatId = resultSet.getInt("productCategoryId");
+                ProductCategory prodCat = productCategoryDao.findCategory(prodCatId);
+                Product prod = new Product(
+                        resultSet.getInt("productId"),
+                        resultSet.getString("name"),
+                        resultSet.getInt("defaultPrice"),
+                        resultSet.getString("currencyString"),
+                        resultSet.getString("description"),
+                        prodCat,
+                        supplier
+                );
+                resultList.add(prod);
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return resultList;
     }
 
     @Override
     public  List<Product> getProductBy(ProductCategory productCategory){
+        String query = "SELECT * FROM products WHERE productCategoryId = " + productCategory.getProductCategoryId() + ";";
         List<Product> resultList = new ArrayList<>();
+        SupplierDaoWithJDBC supplierDaoWithJDBC = new SupplierDaoMemWithJDBC();
+
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                int prodCatId = resultSet.getInt("productCategoryId");
+                int supplierId = resultSet.getInt("supplierId");
+                Supplier supplier = supplierDaoWithJDBC.findSupplier(supplierId);
+                Product prod = new Product(
+                        resultSet.getInt("productId"),
+                        resultSet.getString("name"),
+                        resultSet.getInt("defaultPrice"),
+                        resultSet.getString("currencyString"),
+                        resultSet.getString("description"),
+                        productCategory,
+                        supplier
+                );
+                resultList.add(prod);
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return resultList;
     }
 
