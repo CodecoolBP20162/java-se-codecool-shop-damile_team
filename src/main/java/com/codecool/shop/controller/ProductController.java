@@ -40,41 +40,46 @@ public class ProductController {
     }
 
     public static ModelAndView renderForCategory(Request req, Response res) {
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        ProductDaoWithJDBC productDaoWithJDBC = new ProductDaoMemWithJDBC();
+        SupplierDaoWithJDBC supplierDaoWithJDBC = new SupplierDaoMemWithJDBC();
+        ProductCategoryDaoWithJDBC productCategoryDaoWithJDBC = new ProductCategoryDaoMemWithJDBC();
+
 
         String selectedCategory = req.params(":categoryName");
+        System.out.println(selectedCategory);
 
-        for (ProductCategory cat : productCategoryDataStore.getAll()) {
+        for (ProductCategory cat : productCategoryDaoWithJDBC.getAllCategories()) {
             if (selectedCategory.equals(cat.getName())) {
-                filteredCategory = productCategoryDataStore.find(cat.getId());
+                filteredCategory = cat;
             }
         }
-
-        filteredProduct = filteredCategory.getProducts();
         Map params = new HashMap<>();
-        params.put("category", productCategoryDataStore.getAll());
-        params.put("products", filteredProduct);
-        params.put("supplier", supplierDataStore.getAll());
+        params.put("category", productCategoryDaoWithJDBC.getAllCategories());
+        params.put("products", productDaoWithJDBC.getProductBy(filteredCategory));
+        params.put("supplier", supplierDaoWithJDBC.getAllSupplier());
         return new ModelAndView(params, "product/index");
     }
 
     public static ModelAndView renderForSupplier(Request req, Response res) {
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+//        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+//        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
+        ProductDaoWithJDBC productDaoWithJDBC = new ProductDaoMemWithJDBC();
+        SupplierDaoWithJDBC supplierDaoWithJDBC = new SupplierDaoMemWithJDBC();
+        ProductCategoryDaoWithJDBC productCategoryDaoWithJDBC = new ProductCategoryDaoMemWithJDBC();
 
-        String selectedCategory = req.params(":supplierName");
+        String selectedSupplier = req.params(":supplierName");
 
-        for (Supplier sup : supplierDataStore.getAll()) {
-            if (selectedCategory.equals(sup.getName())) {
-                filteredSupplier = supplierDataStore.find(sup.getId());
+        for (Supplier sup : supplierDaoWithJDBC.getAllSupplier()) {
+            if (selectedSupplier.equals(sup.getName())) {
+                filteredSupplier = sup;
             }
         }
-        filteredProduct = filteredSupplier.getProducts();
         Map params = new HashMap<>();
-        params.put("suppliers", supplierDataStore.getAll());
-        params.put("category", productCategoryDataStore.getAll());
-        params.put("products", filteredProduct);
+        params.put("suppliers", supplierDaoWithJDBC.getAllSupplier());
+        params.put("category", productCategoryDaoWithJDBC.getAllCategories());
+        params.put("products", productDaoWithJDBC.getProductBy(filteredSupplier));
         return new ModelAndView(params, "product/index");
     }
 }
