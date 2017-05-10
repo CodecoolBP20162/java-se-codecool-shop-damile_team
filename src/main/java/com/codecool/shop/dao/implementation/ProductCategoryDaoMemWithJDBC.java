@@ -35,6 +35,30 @@ public class ProductCategoryDaoMemWithJDBC implements ProductCategoryDaoWithJDBC
         return resultList;
     }
 
+    @Override
+    public ProductCategory findCategory(int id) {
+        String query = "SELECT * FROM productcategories WHERE productCategoryId ='" + id + "';";
+
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if(resultSet.next()) {
+                ProductCategory prodCat = new ProductCategory(
+                        resultSet.getInt(1),
+                        resultSet.getString("name"),
+                        resultSet.getString("department"),
+                        resultSet.getString("description")
+                );
+                return prodCat;
+            } else {return null;}
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
                 DATABASE,

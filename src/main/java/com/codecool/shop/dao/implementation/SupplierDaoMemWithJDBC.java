@@ -37,6 +37,28 @@ public class SupplierDaoMemWithJDBC implements SupplierDaoWithJDBC {
         return resultList;
     }
 
+    @Override
+    public Supplier findSupplier(int id) {
+        String query = "SELECT * FROM suppliers WHERE supplierId ='" + id + "';";
+        try {
+            Connection connection = getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            if(resultSet.next()){
+                Supplier supplier = new Supplier(
+                        resultSet.getInt(1),
+                        resultSet.getString("name"),
+                        resultSet.getString("description")
+                );
+                return supplier;
+            } else {return null;}
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
                 DATABASE,
