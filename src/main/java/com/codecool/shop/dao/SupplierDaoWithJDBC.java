@@ -7,4 +7,5 @@ import java.util.List;
 public interface SupplierDaoWithJDBC {
 
     List<Supplier> getAllSupplier();
+    Supplier findSupplier(int id);
 }
