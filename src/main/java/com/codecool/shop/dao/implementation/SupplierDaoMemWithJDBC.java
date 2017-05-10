@@ -1,5 +1,6 @@
 package com.codecool.shop.dao.implementation;
 
+import com.codecool.shop.dao.ProductDaoWithJDBC;
 import com.codecool.shop.dao.SupplierDaoWithJDBC;
 import com.codecool.shop.model.*;
 
@@ -16,6 +17,8 @@ public class SupplierDaoMemWithJDBC implements SupplierDaoWithJDBC {
     @Override
     public List<Supplier> getAllSupplier() {
         String query = "SELECT * FROM suppliers;";
+        ProductDaoWithJDBC productDaoWithJDBC = new ProductDaoMemWithJDBC();
+        List<Product> products = productDaoWithJDBC.listAllProducts();
 
         List<Supplier> resultList = new ArrayList<>();
 
@@ -29,8 +32,14 @@ public class SupplierDaoMemWithJDBC implements SupplierDaoWithJDBC {
                         resultSet.getString("name"),
                         resultSet.getString("description")
                 );
+                for(Product prod : products) {
+                    if(prod.getSupplier().getSupplierId().equals(supp.getSupplierId())) {
+                        supp.addProduct(prod);
+                    }
+                }
                 resultList.add(supp);
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,6 +59,7 @@ public class SupplierDaoMemWithJDBC implements SupplierDaoWithJDBC {
                         resultSet.getString("name"),
                         resultSet.getString("description")
                 );
+                connection.close();
                 return supplier;
             } else {return null;}
 

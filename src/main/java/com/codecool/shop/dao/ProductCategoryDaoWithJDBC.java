@@ -6,4 +6,5 @@ public interface ProductCategoryDaoWithJDBC {
 
     List<ProductCategory> getAllCategories();
     ProductCategory findCategory(int id);
+    ProductCategory findCategory(String name);
 }

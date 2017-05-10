@@ -1,6 +1,7 @@
 import com.codecool.shop.controller.ProductController;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.*;
+import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import spark.Request;
@@ -19,6 +20,15 @@ public class Main {
         System.out.println(productCategoryDaoWithJDBC.getAllCategories());
         SupplierDaoWithJDBC supplierDaoWithJDBC = new SupplierDaoMemWithJDBC();
         System.out.println(supplierDaoWithJDBC.getAllSupplier());
+        System.out.println("Products by Category");
+        for (ProductCategory pc : productCategoryDaoWithJDBC.getAllCategories()) {
+            System.out.println(pc.getProducts());
+        }
+        System.out.println("Products by Supplier");
+        for (Supplier supplier : supplierDaoWithJDBC.getAllSupplier()) {
+            System.out.println(supplier.getProducts());
+        }
+        System.out.println(productCategoryDaoWithJDBC.findCategory("Tablet"));
         // default server settings
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
