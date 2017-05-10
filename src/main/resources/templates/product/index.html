@@ -77,12 +77,12 @@
 
                                 <!-- Trigger the modal with a button -->
                                 <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
-                                        th:attr="data-target='#myModal'+${prod.id}"
+                                        th:attr="data-target='#myModal'+${prod.productId}"
                                 >Add to cart
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" th:attr="id='myModal'+${prod.id}" role="dialog">
+                                <div class="modal fade" th:attr="id='myModal'+${prod.productId}" role="dialog">
                                     <div class="modal-dialog">
 
                                         <!-- Modal content-->
@@ -100,7 +100,7 @@
                                                     Product name</h4>
                                                 <img class="group list-group-image"
                                                      src="http://placehold.it/400x250/000/fff"
-                                                     th:attr="src='/img/product_' + ${prod.id} + '.jpg'" alt=""/>
+                                                     th:attr="src='/img/product_' + ${prod.productId} + '.jpg'" alt=""/>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close
