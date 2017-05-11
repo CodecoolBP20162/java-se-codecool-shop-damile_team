@@ -30,6 +30,10 @@ public class ProductCategory extends BaseModel {
         this.department = department;
     }
 
+    public String getDescription() {return description;}
+
+    public void setDescription (String description) {this.description = description;}
+
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
