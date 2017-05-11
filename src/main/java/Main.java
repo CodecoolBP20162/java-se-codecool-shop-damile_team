@@ -8,12 +8,14 @@ import spark.Request;
 import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
+import java.io.IOException;
+
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ProductDaoWithJDBC productDaoWithJDBC = new ProductDaoMemWithJDBC();
         System.out.println(productDaoWithJDBC.listAllProducts());
         ProductCategoryDaoWithJDBC productCategoryDaoWithJDBC = new ProductCategoryDaoMemWithJDBC();

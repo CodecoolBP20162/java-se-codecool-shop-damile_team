@@ -1,23 +1,24 @@
 package com.codecool.shop.dao.implementation;
 
-import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductCategoryDaoWithJDBC;
 import com.codecool.shop.dao.ProductDaoWithJDBC;
 import com.codecool.shop.dao.SupplierDaoWithJDBC;
-import com.codecool.shop.model.*;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 
+import java.io.IOException;
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDaoMemWithJDBC implements ProductDaoWithJDBC {
+public class ProductDaoMemWithJDBC extends JDBCConnection implements ProductDaoWithJDBC {
 
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "szilarddavid";
-    private static final String DB_PASSWORD = "szilarddavid";
+    public ProductDaoMemWithJDBC() throws IOException {
+    }
 
     @Override
-    public List<Product> listAllProducts() {
+    public List<Product> listAllProducts() throws IOException {
         ProductCategoryDaoWithJDBC productCategoryDao = new ProductCategoryDaoMemWithJDBC();
         SupplierDaoWithJDBC supplierDaoWithJDBC = new SupplierDaoMemWithJDBC();
         String query = "SELECT * FROM products;";
@@ -52,7 +53,7 @@ public class ProductDaoMemWithJDBC implements ProductDaoWithJDBC {
     }
 
     @Override
-    public List<Product> getProductBy(Supplier supplier) {
+    public List<Product> getProductBy(Supplier supplier) throws IOException {
         String query = "SELECT * FROM products WHERE supplierId = " + supplier.getSupplierId() + ";";
         List<Product> resultList = new ArrayList<>();
         ProductCategoryDaoWithJDBC productCategoryDao = new ProductCategoryDaoMemWithJDBC();
@@ -83,7 +84,7 @@ public class ProductDaoMemWithJDBC implements ProductDaoWithJDBC {
     }
 
     @Override
-    public  List<Product> getProductBy(ProductCategory productCategory){
+    public  List<Product> getProductBy(ProductCategory productCategory) throws IOException {
         String query = "SELECT * FROM products WHERE productCategoryId = " + productCategory.getProductCategoryId() + ";";
         List<Product> resultList = new ArrayList<>();
         SupplierDaoWithJDBC supplierDaoWithJDBC = new SupplierDaoMemWithJDBC();
@@ -124,21 +125,4 @@ public class ProductDaoMemWithJDBC implements ProductDaoWithJDBC {
         executeQuery(query);
     }
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                DATABASE,
-                DB_USER,
-                DB_PASSWORD);
-    }
-
-    private void executeQuery(String query) {
-        try (Connection connection = getConnection();
-             Statement statement =connection.createStatement();
-        ){
-            statement.execute(query);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
