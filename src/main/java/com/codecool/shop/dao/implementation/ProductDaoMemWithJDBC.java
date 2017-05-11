@@ -1,20 +1,21 @@
 package com.codecool.shop.dao.implementation;
 
-import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductCategoryDaoWithJDBC;
 import com.codecool.shop.dao.ProductDaoWithJDBC;
 import com.codecool.shop.dao.SupplierDaoWithJDBC;
-import com.codecool.shop.model.*;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.ProductCategory;
+import com.codecool.shop.model.Supplier;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoMemWithJDBC implements ProductDaoWithJDBC {
 
     private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "szilarddavid";
-    private static final String DB_PASSWORD = "szilarddavid";
+    private static final String DB_USER = "arinyu";
+    private static final String DB_PASSWORD = "Faszfej1";
 
     @Override
     public List<Product> listAllProducts() {
