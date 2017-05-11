@@ -11,8 +11,9 @@ import java.util.List;
 public class SupplierDaoMemWithJDBC implements SupplierDaoWithJDBC {
 
     private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "minh";
-    private static final String DB_PASSWORD = "Gumikacsa93";
+
+    private static final String DB_USER = "arinyu";
+    private static final String DB_PASSWORD = "Faszfej1";
 
     @Override
     public List<Supplier> getAllSupplier() {
