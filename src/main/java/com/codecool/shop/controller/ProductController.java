@@ -77,7 +77,7 @@ public class ProductController {
             }
         }
         Map params = new HashMap<>();
-        params.put("suppliers", supplierDaoWithJDBC.getAllSupplier());
+        params.put("supplier", supplierDaoWithJDBC.getAllSupplier());
         params.put("category", productCategoryDaoWithJDBC.getAllCategories());
         params.put("products", productDaoWithJDBC.getProductBy(filteredSupplier));
         return new ModelAndView(params, "product/index");
