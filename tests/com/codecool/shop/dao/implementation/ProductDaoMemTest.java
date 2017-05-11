@@ -54,6 +54,8 @@ class ProductDaoMemTest {
         test.add(AmazonFire);
         test.add(Alienware);
         assertEquals(2,test.getAll().size());
+        test.remove(1);
+        test.remove(2);
 
     }
 
