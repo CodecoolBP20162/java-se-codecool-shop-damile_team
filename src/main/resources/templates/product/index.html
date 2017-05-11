@@ -11,8 +11,6 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="js/app.js"></script>
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
@@ -37,92 +35,94 @@
 <div class="jumbotron text-center">
     <h1>Codecool Shop</h1>
 </div>
-
-<div class="container">
-    <div class="well well-sm">
-        <a href="#" class="btn btn-info btn-lg" style="float:right">
-            <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
-        </a>
-        <div class="dropdown">
-            <button onclick="location.href='products'" class="dropbtn">All products</button>
-            <button onclick="FilterByCategory()" class="dropbtn">Filter by category:</button>
-            <div id="myDropdown1" class="dropdown-content">
-                <a href="mobiles">Mobiles</a>
-                <a href="tablets">Tablets</a>
-                <a href="tvs">LED TVs</a>
-            </div>
-            <button onclick="FilterBySupplier()" class="dropbtn">Filter by supplier:</button>
-            <div id="myDropdown2" class="dropdown-content" style="left: 238px">
-                <a href="amazon">Amazon</a>
-                <a href="lenovo">Lenovo</a>
-                <a href="apple">Apple</a>
-                <a href="samsung">Samsung</a>
-                <a href="others">Others</a>
-            </div>
-        </div>
-    </div>
-
-    <div id="products" class="row list-group">
-
-        <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="thumbnail">
-                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
-                     th:attr="src='/img/product_' + ${prod.id} + '.jpg'" alt=""/>
-                <div class="caption">
-                    <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
-                    <p class="group inner list-group-item-text" th:text="${prod.description}">Product
-                        description... </p>
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+<nav>
+    <div class="container">
+        <div class="well well-sm">
+            <a href="#" class="btn btn-info btn-lg" style="float:right">
+                <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+            </a>
+            <div class="dropdown">
+                <button onclick="location.href='/'" class="dropbtn">All products</button>
+                <button onclick="FilterByCategory()" class="dropbtn">Filter by category:</button>
+                <div id="myDropdown1" class="dropdown-content">
+                    <div th:each="cat,iterStat : ${category}">
+                        <div><a th:href="'/Category/' + ${cat.name}" th:text="${cat.name}"></a>
                         </div>
-                        <div class="col-xs-12 col-md-6">
-
-                            <!-- Trigger the modal with a button -->
-                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
-                                    th:attr="data-target='#myModal'+${prod.id}"
-                                    >Add to cart
-                            </button>
-
-                            <!-- Modal -->
-                            <div class="modal fade" th:attr="id='myModal'+${prod.id}" role="dialog">
-                                <div class="modal-dialog">
-
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title" style="color: green"><span
-                                                    class="glyphicon glyphicon-ok"></span>This product has been added to
-                                                your cart</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h4 class="group inner list-group-item-heading" th:text="${prod.name}">
-                                                Product name</h4>
-                                            <img class="group list-group-image"
-                                                 src="http://placehold.it/400x250/000/fff"
-                                                 th:attr="src='/img/product_' + ${prod.id} + '.jpg'" alt=""/>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
+                    </div>
+                </div>
+                <button onclick="FilterBySupplier()" class="dropbtn">Filter by supplier:</button>
+                <div id="myDropdown2" class="dropdown-content" style="left: 280px">
+                    <div th:each="sup,iterStat : ${supplier}">
+                        <div><a th:href="'/Supplier/' + ${sup.name}" th:text="${sup.name}"></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div id="products" class="row list-group">
 
-</div>
+            <div class="item col-xs-4 col-lg-4" th:each="prod,iterStat : ${products}">
+                <div class="thumbnail">
+                    <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
+                         th:attr="src='/img/product_' + ${prod.productId} + '.jpg'" alt=""/>
+                    <div class="caption">
+                        <h4 class="group inner list-group-item-heading" th:text="${prod.name}">Product name</h4>
+                        <p class="group inner list-group-item-text" th:text="${prod.description}">Product
+                            description... </p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+
+                                <!-- Trigger the modal with a button -->
+                                <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+                                        th:attr="data-target='#myModal'+${prod.productId}"
+                                >Add to cart
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" th:attr="id='myModal'+${prod.productId}" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;
+                                                </button>
+                                                <h4 class="modal-title" style="color: green"><span
+                                                        class="glyphicon glyphicon-ok"></span>This product has been
+                                                    added to
+                                                    your cart</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h4 class="group inner list-group-item-heading" th:text="${prod.name}">
+                                                    Product name</h4>
+                                                <img class="group list-group-image"
+                                                     src="http://placehold.it/400x250/000/fff"
+                                                     th:attr="src='/img/product_' + ${prod.productId} + '.jpg'" alt=""/>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
 
 <div th:replace="footer :: copy"></div>
+<script th:src="@{~/js/app.js}"></script>
 
 </body>
 </html>
