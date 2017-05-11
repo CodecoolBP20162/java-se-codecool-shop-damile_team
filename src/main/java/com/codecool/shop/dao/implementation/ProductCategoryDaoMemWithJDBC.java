@@ -6,11 +6,7 @@ import com.codecool.shop.model.*;
 import java.sql.*;
 import java.util.*;
 
-public class ProductCategoryDaoMemWithJDBC implements ProductCategoryDaoWithJDBC {
-
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "szilarddavid";
-    private static final String DB_PASSWORD = "szilarddavid";
+public class ProductCategoryDaoMemWithJDBC extends JDBCConnection implements ProductCategoryDaoWithJDBC {
 
     @Override
     public List<ProductCategory> getAllCategories() {
@@ -101,21 +97,4 @@ public class ProductCategoryDaoMemWithJDBC implements ProductCategoryDaoWithJDBC
         executeQuery(query);
     }
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                DATABASE,
-                DB_USER,
-                DB_PASSWORD);
-    }
-
-    private void executeQuery(String query) {
-        try (Connection connection = getConnection();
-             Statement statement =connection.createStatement();
-        ){
-            statement.execute(query);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
