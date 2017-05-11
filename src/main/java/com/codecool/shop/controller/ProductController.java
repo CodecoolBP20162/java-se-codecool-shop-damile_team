@@ -13,6 +13,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class ProductController {
     private static List<Product> filteredProduct;
 
 
-    public static ModelAndView renderProducts(Request req, Response res) {
+    public static ModelAndView renderProducts(Request req, Response res) throws IOException {
 //        ProductDao productDataStore = ProductDaoMem.getInstance();
 //        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 //        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
@@ -39,7 +40,7 @@ public class ProductController {
         return new ModelAndView(params, "product/index");
     }
 
-    public static ModelAndView renderForCategory(Request req, Response res) {
+    public static ModelAndView renderForCategory(Request req, Response res) throws IOException {
 //        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
 //        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         ProductDaoWithJDBC productDaoWithJDBC = new ProductDaoMemWithJDBC();
@@ -62,7 +63,7 @@ public class ProductController {
         return new ModelAndView(params, "product/index");
     }
 
-    public static ModelAndView renderForSupplier(Request req, Response res) {
+    public static ModelAndView renderForSupplier(Request req, Response res) throws IOException {
 //        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 //        SupplierDao supplierDataStore = SupplierDaoMem.getInstance();
         ProductDaoWithJDBC productDaoWithJDBC = new ProductDaoMemWithJDBC();
