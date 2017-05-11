@@ -9,8 +9,8 @@ import java.util.*;
 public class ProductCategoryDaoMemWithJDBC implements ProductCategoryDaoWithJDBC {
 
     private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "szilarddavid";
-    private static final String DB_PASSWORD = "szilarddavid";
+    private static final String DB_USER = "minh";
+    private static final String DB_PASSWORD = "Gumikacsa93";
 
     @Override
     public List<ProductCategory> getAllCategories() {

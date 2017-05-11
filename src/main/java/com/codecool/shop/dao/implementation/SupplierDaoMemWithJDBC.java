@@ -11,8 +11,8 @@ import java.util.List;
 public class SupplierDaoMemWithJDBC implements SupplierDaoWithJDBC {
 
     private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-    private static final String DB_USER = "szilarddavid";
-    private static final String DB_PASSWORD = "szilarddavid";
+    private static final String DB_USER = "minh";
+    private static final String DB_PASSWORD = "Gumikacsa93";
 
     @Override
     public List<Supplier> getAllSupplier() {
@@ -71,7 +71,7 @@ public class SupplierDaoMemWithJDBC implements SupplierDaoWithJDBC {
 
     @Override
     public void add(Supplier supplier) {
-        String query = "INSERT INTO productcategories (supplierId, name, description)" +
+        String query = "INSERT INTO suppliers (supplierId, name, description)" +
                 "VALUES ('" + supplier.getSupplierId() + "', '" + supplier.getName() + "','" + supplier.getDescription() + "');";
         executeQuery(query);
     }
