@@ -12,14 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 class SupplierDaoMemTest {
 
-//    @AfterEach
-//    public void RemoveExample(){
-//        SupplierDao test=SupplierDaoMem.getInstance();
-//        for(int i=0;i<test.getAll().size();i++){
-//            test.remove(i);
-//        }
-//    }
-
     @Test
     public void TestIsFindIDNotUnder0(){
         SupplierDaoMem test = SupplierDaoMem.getInstance();
