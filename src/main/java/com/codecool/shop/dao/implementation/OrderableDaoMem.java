@@ -28,12 +28,18 @@ public class OrderableDaoMem implements OrderableDao {
     }
 
     @Override
-    public Orderable find(int id) {
+    public Orderable find(int id) {if(id<0){
+        throw new IllegalArgumentException("ID must equal or bigger than 0");
+    }
         return DATA.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }
 
     @Override
     public void remove(int id) {
+        if(id<0)
+        {
+            throw new IllegalArgumentException("ID must equal or bigger than 0");
+        }
         DATA.remove(find(id));
     }
 

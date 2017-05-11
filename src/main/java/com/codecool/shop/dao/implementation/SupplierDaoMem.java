@@ -30,12 +30,18 @@ public class SupplierDaoMem implements SupplierDao {
     }
 
     @Override
-    public Supplier find(int id) {
+    public Supplier find(int id)
+    {if(id<0){
+        throw new IllegalArgumentException("ID not good");
+    }
         return DATA.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }
 
     @Override
     public void remove(int id) {
+        if (id<0){
+            throw new IllegalArgumentException("ID not good");
+        }
         DATA.remove(find(id));
     }
 
