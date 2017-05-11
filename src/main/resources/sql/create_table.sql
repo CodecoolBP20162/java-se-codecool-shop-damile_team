@@ -52,8 +52,8 @@ INSERT INTO products(productId, name, defaultPrice, currencyString, description,
 INSERT INTO products(productId, name, defaultPrice, currencyString, description, productCategoryId, supplierId) VALUES (5, 'HTC Desire', 90, 'USD', 'Our HTC Desire is a great value for media consumption.', 2, 5);
 INSERT INTO products(productId, name, defaultPrice, currencyString, description, productCategoryId, supplierId) VALUES (6, 'Samsung Galaxy Note 7', 969, 'USD', '"Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports. Adjustable kickstand.', 2, 4);
 INSERT INTO products(productId, name, defaultPrice, currencyString, description, productCategoryId, supplierId) VALUES (7, 'Samsung UN28H4000', 464, 'USD', 'Fantastic price. Large content ecosystem. Good parental controls. Helpful technical support.', 3, 4);
-INSERT INTO products(productId, name, defaultPrice, currencyString, description, productCategoryId, supplierId) VALUES (8, 'Vizio D24-D1 24 Smart LCD TV', 849, 'USD', 'Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports.', 1, 5);
-INSERT INTO products(productId, name, defaultPrice, currencyString, description, productCategoryId, supplierId) VALUES (9, 'Element ELEFW328R', 128, 'USD', 'Hey handsome, you are beautiful, buy me, I know you want me.', 1, 5);
+INSERT INTO products(productId, name, defaultPrice, currencyString, description, productCategoryId, supplierId) VALUES (8, 'Vizio D24-D1 24 Smart LCD TV', 849, 'USD', 'Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports.', 3, 5);
+INSERT INTO products(productId, name, defaultPrice, currencyString, description, productCategoryId, supplierId) VALUES (9, 'Element ELEFW328R', 128, 'USD', 'Hey handsome, you are beautiful, buy me, I know you want me.', 3, 5);
 
 
 
