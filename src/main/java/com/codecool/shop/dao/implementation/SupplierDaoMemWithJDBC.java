@@ -4,19 +4,18 @@ import com.codecool.shop.dao.ProductDaoWithJDBC;
 import com.codecool.shop.dao.SupplierDaoWithJDBC;
 import com.codecool.shop.model.*;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 import java.util.List;
 
-public class SupplierDaoMemWithJDBC implements SupplierDaoWithJDBC {
+public class SupplierDaoMemWithJDBC extends JDBCConnection implements SupplierDaoWithJDBC {
 
-    private static final String DATABASE = "jdbc:postgresql://localhost:5432/codecoolshop";
-
-    private static final String DB_USER = "arinyu";
-    private static final String DB_PASSWORD = "Faszfej1";
+    public SupplierDaoMemWithJDBC() throws IOException {
+    }
 
     @Override
-    public List<Supplier> getAllSupplier() {
+    public List<Supplier> getAllSupplier() throws IOException {
         String query = "SELECT * FROM suppliers;";
         ProductDaoWithJDBC productDaoWithJDBC = new ProductDaoMemWithJDBC();
         List<Product> products = productDaoWithJDBC.listAllProducts();
@@ -77,21 +76,4 @@ public class SupplierDaoMemWithJDBC implements SupplierDaoWithJDBC {
         executeQuery(query);
     }
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                DATABASE,
-                DB_USER,
-                DB_PASSWORD);
-    }
-
-    private void executeQuery(String query) {
-        try (Connection connection = getConnection();
-             Statement statement =connection.createStatement();
-        ){
-            statement.execute(query);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
