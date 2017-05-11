@@ -9,4 +9,5 @@ public interface ProductDaoWithJDBC {
     List<Product> listAllProducts();
     List<Product> getProductBy(Supplier supplier);
     List<Product> getProductBy(ProductCategory productCategory);
+    void add(Product product);
 }

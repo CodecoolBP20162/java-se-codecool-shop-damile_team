@@ -93,7 +93,6 @@ public class ProductDaoMemWithJDBC implements ProductDaoWithJDBC {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                int prodCatId = resultSet.getInt("productCategoryId");
                 int supplierId = resultSet.getInt("supplierId");
                 Supplier supplier = supplierDaoWithJDBC.findSupplier(supplierId);
                 Product prod = new Product(
@@ -113,6 +112,16 @@ public class ProductDaoMemWithJDBC implements ProductDaoWithJDBC {
         }
 
         return resultList;
+    }
+
+    @Override
+    public void add(Product product){
+        String query = "INSERT INTO products (productId, name, defaultPrice, currencyString," +
+                "description, productCategoryId, supplierId)" +
+                "VALUES ('" + product.getProductId() + "', '" + product.getName() + "', '" + product.getDefaultPrice() +
+                "', '" + product.getDefaultCurrency() + "', '" + product.getDescription() + "', '" + product.getProductCategory().getProductCategoryId() +
+                "', '" + product.getSupplier().getSupplierId() + "');";
+        executeQuery(query);
     }
 
     private Connection getConnection() throws SQLException {
