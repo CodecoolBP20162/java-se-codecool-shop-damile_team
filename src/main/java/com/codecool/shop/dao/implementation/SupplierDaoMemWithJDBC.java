@@ -71,7 +71,7 @@ public class SupplierDaoMemWithJDBC implements SupplierDaoWithJDBC {
 
     @Override
     public void add(Supplier supplier) {
-        String query = "INSERT INTO productcategories (supplierId, name, description)" +
+        String query = "INSERT INTO suppliers (supplierId, name, description)" +
                 "VALUES ('" + supplier.getSupplierId() + "', '" + supplier.getName() + "','" + supplier.getDescription() + "');";
         executeQuery(query);
     }
