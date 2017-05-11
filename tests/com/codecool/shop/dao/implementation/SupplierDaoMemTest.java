@@ -15,23 +15,32 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class SupplierDaoMemTest {
 
-    @AfterEach
-    public void RemoveExample(){
-        SupplierDao test=SupplierDaoMem.getInstance();
-        for(int i=0;i<test.getAll().size();i++){
-            test.remove(i);
-        }
-    }
+//    @AfterEach
+//    public void RemoveExample(){
+//        SupplierDao test=SupplierDaoMem.getInstance();
+//        for(int i=0;i<test.getAll().size();i++){
+//            test.remove(i);
+//        }
+//    }
 
     @Test
-    public void TestIsIDNotUnder0(){
+    public void TestIsFindIDNotUnder0(){
         SupplierDaoMem test = SupplierDaoMem.getInstance();
         assertThrows(IllegalArgumentException.class, ()->{
             test.find(-1);
+        });
+
+    }
+
+    @Test
+    public void TestIsRemoveIDNotUnder0(){
+        SupplierDaoMem test = SupplierDaoMem.getInstance();
+        assertThrows(IllegalArgumentException.class, ()->{
             test.remove(-1);
         });
 
     }
+
 
     @Test
     public void TestIsCategorySizeAfterAdd(){

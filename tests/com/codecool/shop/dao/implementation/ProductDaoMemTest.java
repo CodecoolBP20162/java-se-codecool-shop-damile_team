@@ -14,14 +14,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductDaoMemTest {
 
     @Test
-    public void TestIsIDNotUnder0(){
+    public void TestIsFindIDNotUnder0(){
         ProductDaoMem test = ProductDaoMem.getInstance();
         assertThrows(IllegalArgumentException.class, ()->{
             test.find(-1);
-            test.remove(-1);
         });
 
     }
+
+    @Test
+    public void TestIsRemoveIDNotUnder0(){
+        ProductDaoMem test = ProductDaoMem.getInstance();
+        assertThrows(IllegalArgumentException.class, ()->{
+            test.remove(-1);
+        });
+    }
+
 
     @Test
     public void TestIsAddWorks(){
