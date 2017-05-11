@@ -8,4 +8,5 @@ public interface SupplierDaoWithJDBC {
 
     List<Supplier> getAllSupplier();
     Supplier findSupplier(int id);
+    void add(Supplier supplier);
 }

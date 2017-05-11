@@ -69,6 +69,13 @@ public class SupplierDaoMemWithJDBC implements SupplierDaoWithJDBC {
         return null;
     }
 
+    @Override
+    public void add(Supplier supplier) {
+        String query = "INSERT INTO productcategories (supplierId, name, description)" +
+                "VALUES ('" + supplier.getSupplierId() + "', '" + supplier.getName() + "','" + supplier.getDescription() + "');";
+        executeQuery(query);
+    }
+
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
                 DATABASE,

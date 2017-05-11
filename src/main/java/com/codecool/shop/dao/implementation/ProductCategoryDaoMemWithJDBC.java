@@ -94,6 +94,13 @@ public class ProductCategoryDaoMemWithJDBC implements ProductCategoryDaoWithJDBC
         return null;
     }
 
+    @Override
+    public void add(ProductCategory prodCat) {
+        String query = "INSERT INTO productcategories (productCategoryId, name, department, description)" +
+                "VALUES ('" + prodCat.getProductCategoryId() + "', '" + prodCat.getName() + "', '" + prodCat.getDepartment() + "', '" + prodCat.getDescription() + "');";
+        executeQuery(query);
+    }
+
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
                 DATABASE,
