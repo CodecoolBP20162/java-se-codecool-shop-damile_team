@@ -16,21 +16,6 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        ProductDaoWithJDBC productDaoWithJDBC = new ProductDaoMemWithJDBC();
-        System.out.println(productDaoWithJDBC.listAllProducts());
-        ProductCategoryDaoWithJDBC productCategoryDaoWithJDBC = new ProductCategoryDaoMemWithJDBC();
-        System.out.println(productCategoryDaoWithJDBC.getAllCategories());
-        SupplierDaoWithJDBC supplierDaoWithJDBC = new SupplierDaoMemWithJDBC();
-        System.out.println(supplierDaoWithJDBC.getAllSupplier());
-        System.out.println("Products by Category");
-        for (ProductCategory pc : productCategoryDaoWithJDBC.getAllCategories()) {
-            System.out.println(pc.getProducts());
-        }
-        System.out.println("Products by Supplier");
-        for (Supplier supplier : supplierDaoWithJDBC.getAllSupplier()) {
-            System.out.println(supplier.getProducts());
-        }
-        System.out.println(productCategoryDaoWithJDBC.findCategory("Tablet"));
         // default server settings
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
