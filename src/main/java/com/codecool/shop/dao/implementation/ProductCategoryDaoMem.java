@@ -32,6 +32,10 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
 
     @Override
     public ProductCategory find(int id) {
+        if(id<0)
+        {
+            throw new IllegalArgumentException("id can't be under 0");
+        }
         return DATA.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }
 
@@ -43,6 +47,10 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
 
     @Override
     public void remove(int id) {
+        if(id<0)
+        {
+            throw new IllegalArgumentException("id can't be under 0");
+        }
         DATA.remove(find(id));
     }
 
