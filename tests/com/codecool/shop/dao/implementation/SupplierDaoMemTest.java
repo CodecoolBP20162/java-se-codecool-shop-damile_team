@@ -36,7 +36,6 @@ class SupplierDaoMemTest {
     @Test
     public void TestIsCategorySizeAfterAdd(){
         SupplierDao test=SupplierDaoMem.getInstance();
-        System.out.println(test.getAll().size()+"s");
         Supplier Lenovo = new Supplier(2,"Lenovo","Computer");
         Supplier Apple = new Supplier(3,"Apple","Mobile phones");
         test.add(Lenovo);
