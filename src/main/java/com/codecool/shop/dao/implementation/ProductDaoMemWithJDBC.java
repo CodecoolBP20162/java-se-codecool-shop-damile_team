@@ -6,14 +6,18 @@ import com.codecool.shop.dao.ProductDaoWithJDBC;
 import com.codecool.shop.dao.SupplierDaoWithJDBC;
 import com.codecool.shop.model.*;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 import java.util.List;
 
 public class ProductDaoMemWithJDBC extends JDBCConnection implements ProductDaoWithJDBC {
 
+    public ProductDaoMemWithJDBC() throws IOException {
+    }
+
     @Override
-    public List<Product> listAllProducts() {
+    public List<Product> listAllProducts() throws IOException {
         ProductCategoryDaoWithJDBC productCategoryDao = new ProductCategoryDaoMemWithJDBC();
         SupplierDaoWithJDBC supplierDaoWithJDBC = new SupplierDaoMemWithJDBC();
         String query = "SELECT * FROM products;";
@@ -48,7 +52,7 @@ public class ProductDaoMemWithJDBC extends JDBCConnection implements ProductDaoW
     }
 
     @Override
-    public List<Product> getProductBy(Supplier supplier) {
+    public List<Product> getProductBy(Supplier supplier) throws IOException {
         String query = "SELECT * FROM products WHERE supplierId = " + supplier.getSupplierId() + ";";
         List<Product> resultList = new ArrayList<>();
         ProductCategoryDaoWithJDBC productCategoryDao = new ProductCategoryDaoMemWithJDBC();
@@ -79,7 +83,7 @@ public class ProductDaoMemWithJDBC extends JDBCConnection implements ProductDaoW
     }
 
     @Override
-    public  List<Product> getProductBy(ProductCategory productCategory){
+    public  List<Product> getProductBy(ProductCategory productCategory) throws IOException {
         String query = "SELECT * FROM products WHERE productCategoryId = " + productCategory.getProductCategoryId() + ";";
         List<Product> resultList = new ArrayList<>();
         SupplierDaoWithJDBC supplierDaoWithJDBC = new SupplierDaoMemWithJDBC();

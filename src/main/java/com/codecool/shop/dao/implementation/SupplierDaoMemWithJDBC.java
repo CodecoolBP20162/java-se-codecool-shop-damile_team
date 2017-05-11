@@ -4,14 +4,18 @@ import com.codecool.shop.dao.ProductDaoWithJDBC;
 import com.codecool.shop.dao.SupplierDaoWithJDBC;
 import com.codecool.shop.model.*;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 import java.util.List;
 
 public class SupplierDaoMemWithJDBC extends JDBCConnection implements SupplierDaoWithJDBC {
 
+    public SupplierDaoMemWithJDBC() throws IOException {
+    }
+
     @Override
-    public List<Supplier> getAllSupplier() {
+    public List<Supplier> getAllSupplier() throws IOException {
         String query = "SELECT * FROM suppliers;";
         ProductDaoWithJDBC productDaoWithJDBC = new ProductDaoMemWithJDBC();
         List<Product> products = productDaoWithJDBC.listAllProducts();
@@ -67,7 +71,7 @@ public class SupplierDaoMemWithJDBC extends JDBCConnection implements SupplierDa
 
     @Override
     public void add(Supplier supplier) {
-        String query = "INSERT INTO productcategories (supplierId, name, description)" +
+        String query = "INSERT INTO suppliers (supplierId, name, description)" +
                 "VALUES ('" + supplier.getSupplierId() + "', '" + supplier.getName() + "','" + supplier.getDescription() + "');";
         executeQuery(query);
     }
